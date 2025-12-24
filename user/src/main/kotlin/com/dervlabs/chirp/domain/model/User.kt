@@ -1,4 +1,4 @@
-package com.dervlabs.user.domain.model
+package com.dervlabs.chirp.domain.model
 
 import java.util.UUID
 
