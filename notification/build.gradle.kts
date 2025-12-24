@@ -1,8 +1,6 @@
 plugins {
-    alias(libs.plugins.kotlin.jvm)
-    alias(libs.plugins.kotlin.spring)
-    alias(libs.plugins.spring.boot)
-    alias(libs.plugins.spring.dependency.management)
+    id("java-library")
+    id("chirp.spring-boot-service")
     alias(libs.plugins.kotlin.jpa)
 }
 
@@ -15,6 +13,8 @@ repositories {
 }
 
 dependencies {
+    implementation(projects.common)
+
     testImplementation(kotlin("test"))
 }
 
