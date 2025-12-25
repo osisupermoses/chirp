@@ -1,5 +1,6 @@
 package com.dervlabs.chirp.api.exception_handling
 
+import com.dervlabs.chirp.domain.exception.InvalidTokenException
 import com.dervlabs.chirp.domain.exception.UserAlreadyExistsException
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -19,6 +20,16 @@ class AuthExceptionHandler {
         "code" to "USER_EXISTS",
         "message" to e.message
     )
+
+    @ExceptionHandler(InvalidTokenException::class)
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    fun onInvalidToken(
+        e: InvalidTokenException
+    ) = mapOf(
+        "code" to "INVALID_TOKEN",
+        "message" to e.message
+    )
+
 
     @ExceptionHandler(MethodArgumentNotValidException::class)
     fun onValidationException(
