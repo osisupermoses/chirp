@@ -1,4 +1,4 @@
-package com.dervlabs.chirp.service.auth
+package com.dervlabs.chirp.service
 
 import com.dervlabs.chirp.domain.exception.InvalidTokenException
 import com.dervlabs.chirp.domain.exception.UserNotFoundException
@@ -25,18 +25,11 @@ class EmailVerificationService(
     fun createVerificationToken(email: String): EmailVerificationToken {
         val userEntity = userRepository.findByEmail(email)
             ?: throw UserNotFoundException()
-        val existingTokens = emailVerificationTokenRepository.findByUserAndUsedAtIsNull(userEntity)
 
-        val now = Instant.now()
-        val usedTokens = existingTokens.map {
-            it.apply {
-                this.usedAt = now
-            }
-        }
-        emailVerificationTokenRepository.saveAll(usedTokens)
+        emailVerificationTokenRepository.invalidateActiveTokensForUser(userEntity)
 
         val token = EmailVerificationTokenEntity(
-            expiresAt = now.plus(expiryHours, ChronoUnit.HOURS),
+            expiresAt = Instant.now().plus(expiryHours, ChronoUnit.HOURS),
             user = userEntity,
         )
 

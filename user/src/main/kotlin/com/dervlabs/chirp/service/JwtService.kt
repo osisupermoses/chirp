@@ -1,4 +1,4 @@
-package com.dervlabs.chirp.service.auth
+package com.dervlabs.chirp.service
 
 import com.dervlabs.chirp.domain.exception.InvalidTokenException
 import com.dervlabs.chirp.domain.model.UserId

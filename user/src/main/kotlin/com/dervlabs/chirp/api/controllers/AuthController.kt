@@ -1,14 +1,18 @@
 package com.dervlabs.chirp.api.controllers
 
 import com.dervlabs.chirp.api.dto.AuthenticatedUserDto
+import com.dervlabs.chirp.api.dto.ChangePasswordRequest
+import com.dervlabs.chirp.api.dto.EmailRequest
 import com.dervlabs.chirp.api.dto.LoginRequest
 import com.dervlabs.chirp.api.dto.RefreshRequest
 import com.dervlabs.chirp.api.dto.RegisterRequest
+import com.dervlabs.chirp.api.dto.ResetPasswordRequest
 import com.dervlabs.chirp.api.dto.UserDto
 import com.dervlabs.chirp.api.mappers.toAuthenticatedUserDto
 import com.dervlabs.chirp.api.mappers.toUserDto
-import com.dervlabs.chirp.service.auth.AuthService
-import com.dervlabs.chirp.service.auth.EmailVerificationService
+import com.dervlabs.chirp.service.AuthService
+import com.dervlabs.chirp.service.EmailVerificationService
+import com.dervlabs.chirp.service.PasswordResetService
 import jakarta.validation.Valid
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
@@ -21,7 +25,8 @@ import org.springframework.web.bind.annotation.RestController
 @RequestMapping("/api/auth")
 class AuthController(
     private val authService: AuthService,
-    private val emailVerificationService: EmailVerificationService
+    private val emailVerificationService: EmailVerificationService,
+    private val passwordResetService: PasswordResetService,
 ) {
 
     @PostMapping("/register")
@@ -66,5 +71,34 @@ class AuthController(
         @RequestParam token: String,
     ) {
         emailVerificationService.verifyEmail(token)
+    }
+
+    @PostMapping("/forgot-password")
+    fun forgotPassword(
+        @Valid @RequestBody body: EmailRequest
+    ) {
+        passwordResetService.requestPasswordReset(body.email)
+    }
+
+    @PostMapping("/reset-password")
+    fun resetPassword(
+        @Valid @RequestBody body: ResetPasswordRequest
+    ) {
+        passwordResetService.resetPassword(
+            token = body.token,
+            newPassword = body.newPassword
+        )
+    }
+
+    @PostMapping("/change-password")
+    fun changePassword(
+        @Valid @RequestBody body: ChangePasswordRequest
+    ) {
+        // TODO: Extract request user ID and call service
+//        passwordResetService.changePassword(
+//            userId = ,
+//            oldPassword = body.oldPassword,
+//            newPassword = body.newPassword
+//        )
     }
 }
