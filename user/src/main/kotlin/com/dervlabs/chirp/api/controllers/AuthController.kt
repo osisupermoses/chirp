@@ -1,7 +1,11 @@
 package com.dervlabs.chirp.api.controllers
 
+import com.dervlabs.chirp.api.dto.AuthenticatedUserDto
+import com.dervlabs.chirp.api.dto.LoginRequest
+import com.dervlabs.chirp.api.dto.RefreshRequest
 import com.dervlabs.chirp.api.dto.RegisterRequest
 import com.dervlabs.chirp.api.dto.UserDto
+import com.dervlabs.chirp.api.mappers.toAuthenticatedUserDto
 import com.dervlabs.chirp.api.mappers.toUserDto
 import com.dervlabs.chirp.service.auth.AuthService
 import jakarta.validation.Valid
@@ -23,5 +27,31 @@ class AuthController(private val authService: AuthService) {
             username = body.username,
             password = body.password,
         ).toUserDto()
+    }
+
+    @PostMapping("/login")
+    fun login(
+        @RequestBody body: LoginRequest,
+    ): AuthenticatedUserDto {
+        return authService.login(
+            email = body.email,
+            password = body.password
+        ).toAuthenticatedUserDto()
+    }
+
+    @PostMapping("/refresh")
+    fun refresh(
+        @RequestBody body: RefreshRequest
+    ): AuthenticatedUserDto {
+        return authService
+            .refresh(body.refreshToken)
+            .toAuthenticatedUserDto()
+    }
+
+    @PostMapping("/logout")
+    fun logout(
+        @RequestBody body: RefreshRequest
+    ) {
+        authService.logout(body.refreshToken)
     }
 }
