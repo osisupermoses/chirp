@@ -11,6 +11,7 @@ import com.dervlabs.chirp.api.dto.ResetPasswordRequest
 import com.dervlabs.chirp.api.dto.UserDto
 import com.dervlabs.chirp.api.mappers.toAuthenticatedUserDto
 import com.dervlabs.chirp.api.mappers.toUserDto
+import com.dervlabs.chirp.api.util.requestUserId
 import com.dervlabs.chirp.infra.rate_limiting.EmailRateLimiter
 import com.dervlabs.chirp.service.AuthService
 import com.dervlabs.chirp.service.EmailVerificationService
@@ -129,11 +130,10 @@ class AuthController(
     fun changePassword(
         @Valid @RequestBody body: ChangePasswordRequest
     ) {
-        // TODO: Extract request user ID and call service
-//        passwordResetService.changePassword(
-//            userId = ,
-//            oldPassword = body.oldPassword,
-//            newPassword = body.newPassword
-//        )
+        passwordResetService.changePassword(
+            userId = requestUserId,
+            oldPassword = body.oldPassword,
+            newPassword = body.newPassword
+        )
     }
 }

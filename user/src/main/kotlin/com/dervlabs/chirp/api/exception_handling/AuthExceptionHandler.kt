@@ -5,6 +5,7 @@ import com.dervlabs.chirp.domain.exception.InvalidCredentialsException
 import com.dervlabs.chirp.domain.exception.InvalidTokenException
 import com.dervlabs.chirp.domain.exception.RateLimitException
 import com.dervlabs.chirp.domain.exception.SamePasswordException
+import com.dervlabs.chirp.domain.exception.UnauthorizedException
 import com.dervlabs.chirp.domain.exception.UserAlreadyExistsException
 import com.dervlabs.chirp.domain.exception.UserNotFoundException
 import org.springframework.http.HttpStatus
@@ -50,6 +51,15 @@ class AuthExceptionHandler {
         e: InvalidTokenException
     ) = mapOf(
         "code" to "INVALID_TOKEN",
+        "message" to e.message
+    )
+
+    @ExceptionHandler(UnauthorizedException::class)
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    fun onUnauthorized(
+        e: UnauthorizedException
+    ) = mapOf(
+        "code" to "UNAUTHORIZED",
         "message" to e.message
     )
 
