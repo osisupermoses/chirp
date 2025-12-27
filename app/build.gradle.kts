@@ -12,7 +12,10 @@ dependencies {
 	implementation(projects.notification)
 	implementation(projects.common)
 
+	implementation(libs.spring.boot.starter.data.redis)
+
 	implementation(libs.spring.boot.starter.security)
+
 	implementation(libs.spring.boot.starter.data.jpa)
 	implementation(libs.postgresql)
 }

@@ -10,6 +10,7 @@ import com.dervlabs.chirp.api.dto.ResetPasswordRequest
 import com.dervlabs.chirp.api.dto.UserDto
 import com.dervlabs.chirp.api.mappers.toAuthenticatedUserDto
 import com.dervlabs.chirp.api.mappers.toUserDto
+import com.dervlabs.chirp.infra.rate_limiting.EmailRateLimiter
 import com.dervlabs.chirp.service.AuthService
 import com.dervlabs.chirp.service.EmailVerificationService
 import com.dervlabs.chirp.service.PasswordResetService
@@ -27,6 +28,7 @@ class AuthController(
     private val authService: AuthService,
     private val emailVerificationService: EmailVerificationService,
     private val passwordResetService: PasswordResetService,
+    private val emailRateLimiter: EmailRateLimiter
 ) {
 
     @PostMapping("/register")
@@ -64,6 +66,17 @@ class AuthController(
         @RequestBody body: RefreshRequest
     ) {
         authService.logout(body.refreshToken)
+    }
+
+    @PostMapping("/resend-verification")
+    fun resendVerification(
+        @Valid @RequestBody body: EmailRequest
+    ) {
+        emailRateLimiter.withRateLimit(
+            email = body.email
+        ) {
+            emailVerificationService.resendVerificationEmail(body.email)
+        }
     }
 
     @GetMapping("/verify")
