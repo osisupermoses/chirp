@@ -1,8 +1,6 @@
 package com.dervlabs.chirp.domain.model
 
-import java.util.UUID
-
-typealias UserId = UUID
+import com.dervlabs.chirp.domain.type.UserId
 
 data class User(
     val id: UserId,

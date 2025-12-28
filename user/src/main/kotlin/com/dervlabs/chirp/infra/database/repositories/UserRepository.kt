@@ -1,6 +1,6 @@
 package com.dervlabs.chirp.infra.database.repositories
 
-import com.dervlabs.chirp.domain.model.UserId
+import com.dervlabs.chirp.domain.type.UserId
 import com.dervlabs.chirp.infra.database.entities.UserEntity
 import org.springframework.data.jpa.repository.JpaRepository
 

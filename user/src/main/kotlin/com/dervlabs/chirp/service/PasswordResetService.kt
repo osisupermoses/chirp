@@ -4,7 +4,7 @@ import com.dervlabs.chirp.domain.exception.InvalidCredentialsException
 import com.dervlabs.chirp.domain.exception.InvalidTokenException
 import com.dervlabs.chirp.domain.exception.SamePasswordException
 import com.dervlabs.chirp.domain.exception.UserNotFoundException
-import com.dervlabs.chirp.domain.model.UserId
+import com.dervlabs.chirp.domain.type.UserId
 import com.dervlabs.chirp.infra.database.entities.PasswordResetTokenEntity
 import com.dervlabs.chirp.infra.database.repositories.PasswordResetTokenRepository
 import com.dervlabs.chirp.infra.database.repositories.RefreshTokenRepository
