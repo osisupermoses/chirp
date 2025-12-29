@@ -7,5 +7,8 @@ plugins {
 dependencies {
     implementation(projects.common)
 
+    implementation(libs.spring.boot.starter.data.jpa)
+    runtimeOnly(libs.postgresql)
+
     testImplementation(kotlin("test"))
 }
