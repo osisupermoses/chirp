@@ -41,7 +41,7 @@ class NotificationUserEventListener(
                     expiresIn = Duration.ofMinutes(event.expiresInMinutes),
                 )
             }
-            is UserEvent.Verified -> Unit
+            else -> Unit
         }
     }
 }

@@ -1,6 +1,7 @@
 package com.dervlabs.chirp.infra.message_queue
 
 import com.dervlabs.chirp.domain.events.ChirpEvent
+import com.dervlabs.chirp.domain.events.chat.ChatEventConstants
 import com.dervlabs.chirp.domain.events.user.UserEventConstants
 import org.springframework.amqp.core.Binding
 import org.springframework.amqp.core.BindingBuilder
@@ -46,12 +47,14 @@ class RabbitMqConfig {
     @Bean
     fun rabbitListenerContainerFactory(
         connectionFactory: ConnectionFactory,
-        transactionManager: PlatformTransactionManager
+        transactionManager: PlatformTransactionManager,
+        messageConverter: JacksonJsonMessageConverter
     ): SimpleRabbitListenerContainerFactory {
         return SimpleRabbitListenerContainerFactory().apply {
             setConnectionFactory(connectionFactory)
             setTransactionManager(transactionManager)
             setChannelTransacted(true)
+            setMessageConverter(messageConverter)
         }
     }
 
@@ -73,6 +76,19 @@ class RabbitMqConfig {
     )
 
     @Bean
+    fun chatExchange() = TopicExchange(
+        ChatEventConstants.CHAT_EXCHANGE,
+        true,
+        false
+    )
+
+    @Bean
+    fun chatUserEventsQueue() = Queue(
+        MessageQueues.CHAT_USER_EVENTS,
+        true
+    )
+
+    @Bean
     fun notificationUserEventsQueue() = Queue(
         MessageQueues.NOTIFICATION_USER_EVENTS,
         true
@@ -87,5 +103,16 @@ class RabbitMqConfig {
             .bind(notificationUserEventsQueue)
             .to(userExchange)
             .with("user.*") // match all user-specific events
+    }
+
+    @Bean
+    fun chatUserEventsBinding(
+        chatUserEventsQueue: Queue,
+        userExchange: TopicExchange
+    ): Binding {
+        return BindingBuilder
+            .bind(chatUserEventsQueue)
+            .to(userExchange)
+            .with("user.*")
     }
 }
