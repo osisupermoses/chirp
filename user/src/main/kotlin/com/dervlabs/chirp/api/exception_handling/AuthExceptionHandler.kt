@@ -5,7 +5,7 @@ import com.dervlabs.chirp.domain.exception.InvalidCredentialsException
 import com.dervlabs.chirp.domain.exception.InvalidTokenException
 import com.dervlabs.chirp.domain.exception.RateLimitException
 import com.dervlabs.chirp.domain.exception.SamePasswordException
-import com.dervlabs.chirp.domain.exception.UnauthorizedException
+import com.dervlabs.chirp.domain.exceptions.UnauthorizedException
 import com.dervlabs.chirp.domain.exception.UserAlreadyExistsException
 import com.dervlabs.chirp.domain.exception.UserNotFoundException
 import org.springframework.http.HttpStatus
