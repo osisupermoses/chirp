@@ -1,4 +1,4 @@
-package com.dervlabs.chirp.domain.type
+package com.dervlabs.chirp.domain.types
 
 import java.util.UUID
 

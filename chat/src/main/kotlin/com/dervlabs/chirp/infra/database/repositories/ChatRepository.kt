@@ -1,7 +1,7 @@
 package com.dervlabs.chirp.infra.database.repositories
 
-import com.dervlabs.chirp.domain.type.ChatId
-import com.dervlabs.chirp.domain.type.UserId
+import com.dervlabs.chirp.domain.types.ChatId
+import com.dervlabs.chirp.domain.types.UserId
 import com.dervlabs.chirp.infra.database.entities.ChatEntity
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.jpa.repository.Query

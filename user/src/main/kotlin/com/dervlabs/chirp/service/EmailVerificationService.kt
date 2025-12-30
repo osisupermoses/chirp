@@ -1,9 +1,9 @@
 package com.dervlabs.chirp.service
 
 import com.dervlabs.chirp.domain.events.user.UserEvent
-import com.dervlabs.chirp.domain.exception.InvalidTokenException
-import com.dervlabs.chirp.domain.exception.UserNotFoundException
-import com.dervlabs.chirp.domain.model.EmailVerificationToken
+import com.dervlabs.chirp.domain.exceptions.InvalidTokenException
+import com.dervlabs.chirp.domain.exceptions.UserNotFoundException
+import com.dervlabs.chirp.domain.models.EmailVerificationToken
 import com.dervlabs.chirp.infra.database.entities.EmailVerificationTokenEntity
 import com.dervlabs.chirp.infra.database.mappers.toEmailVerificationToken
 import com.dervlabs.chirp.infra.database.repositories.EmailVerificationTokenRepository

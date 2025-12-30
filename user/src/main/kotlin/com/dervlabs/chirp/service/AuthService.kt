@@ -1,14 +1,14 @@
 package com.dervlabs.chirp.service
 
 import com.dervlabs.chirp.domain.events.user.UserEvent
-import com.dervlabs.chirp.domain.exception.EmailNotVerifiedException
-import com.dervlabs.chirp.domain.exception.InvalidCredentialsException
-import com.dervlabs.chirp.domain.exception.InvalidTokenException
-import com.dervlabs.chirp.domain.exception.UserAlreadyExistsException
-import com.dervlabs.chirp.domain.exception.UserNotFoundException
-import com.dervlabs.chirp.domain.model.AuthenticatedUser
-import com.dervlabs.chirp.domain.model.User
-import com.dervlabs.chirp.domain.type.UserId
+import com.dervlabs.chirp.domain.exceptions.EmailNotVerifiedException
+import com.dervlabs.chirp.domain.exceptions.InvalidCredentialsException
+import com.dervlabs.chirp.domain.exceptions.InvalidTokenException
+import com.dervlabs.chirp.domain.exceptions.UserAlreadyExistsException
+import com.dervlabs.chirp.domain.exceptions.UserNotFoundException
+import com.dervlabs.chirp.domain.models.AuthenticatedUser
+import com.dervlabs.chirp.domain.models.User
+import com.dervlabs.chirp.domain.types.UserId
 import com.dervlabs.chirp.infra.database.entities.RefreshTokenEntity
 import com.dervlabs.chirp.infra.database.entities.UserEntity
 import com.dervlabs.chirp.infra.database.mappers.toUser

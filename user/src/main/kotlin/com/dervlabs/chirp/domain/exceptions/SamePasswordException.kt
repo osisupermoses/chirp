@@ -1,4 +1,4 @@
-package com.dervlabs.chirp.domain.exception
+package com.dervlabs.chirp.domain.exceptions
 
 class SamePasswordException: RuntimeException(
     "The new password can't be equal to the old one"

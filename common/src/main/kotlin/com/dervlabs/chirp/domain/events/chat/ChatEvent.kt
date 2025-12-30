@@ -1,8 +1,8 @@
 package com.dervlabs.chirp.domain.events.chat
 
 import com.dervlabs.chirp.domain.events.ChirpEvent
-import com.dervlabs.chirp.domain.type.ChatId
-import com.dervlabs.chirp.domain.type.UserId
+import com.dervlabs.chirp.domain.types.ChatId
+import com.dervlabs.chirp.domain.types.UserId
 import java.time.Instant
 import java.util.UUID
 

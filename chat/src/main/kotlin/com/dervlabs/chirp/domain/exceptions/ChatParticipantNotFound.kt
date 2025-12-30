@@ -1,6 +1,6 @@
 package com.dervlabs.chirp.domain.exceptions
 
-import com.dervlabs.chirp.domain.type.UserId
+import com.dervlabs.chirp.domain.types.UserId
 
 class ChatParticipantNotFound(
     id: UserId

@@ -1,13 +1,13 @@
 package com.dervlabs.chirp.api.exception_handling
 
-import com.dervlabs.chirp.domain.exception.EmailNotVerifiedException
-import com.dervlabs.chirp.domain.exception.InvalidCredentialsException
-import com.dervlabs.chirp.domain.exception.InvalidTokenException
-import com.dervlabs.chirp.domain.exception.RateLimitException
-import com.dervlabs.chirp.domain.exception.SamePasswordException
+import com.dervlabs.chirp.domain.exceptions.EmailNotVerifiedException
+import com.dervlabs.chirp.domain.exceptions.InvalidCredentialsException
+import com.dervlabs.chirp.domain.exceptions.InvalidTokenException
+import com.dervlabs.chirp.domain.exceptions.RateLimitException
+import com.dervlabs.chirp.domain.exceptions.SamePasswordException
 import com.dervlabs.chirp.domain.exceptions.UnauthorizedException
-import com.dervlabs.chirp.domain.exception.UserAlreadyExistsException
-import com.dervlabs.chirp.domain.exception.UserNotFoundException
+import com.dervlabs.chirp.domain.exceptions.UserAlreadyExistsException
+import com.dervlabs.chirp.domain.exceptions.UserNotFoundException
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.MethodArgumentNotValidException

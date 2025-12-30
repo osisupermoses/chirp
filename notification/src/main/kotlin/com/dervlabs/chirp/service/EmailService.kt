@@ -1,6 +1,6 @@
 package com.dervlabs.chirp.service
 
-import com.dervlabs.chirp.domain.type.UserId
+import com.dervlabs.chirp.domain.types.UserId
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.mail.MailException

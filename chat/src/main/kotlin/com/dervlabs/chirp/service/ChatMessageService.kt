@@ -1,4 +1,4 @@
-package com.dervlabs.chirp.infra.service
+package com.dervlabs.chirp.service
 
 import com.dervlabs.chirp.domain.events.MessageDeletedEvent
 import com.dervlabs.chirp.domain.events.chat.ChatEvent
@@ -7,9 +7,9 @@ import com.dervlabs.chirp.domain.exceptions.ChatParticipantNotFound
 import com.dervlabs.chirp.domain.exceptions.ForbiddenException
 import com.dervlabs.chirp.domain.exceptions.MessageNotFoundException
 import com.dervlabs.chirp.domain.models.ChatMessage
-import com.dervlabs.chirp.domain.type.ChatId
-import com.dervlabs.chirp.domain.type.ChatMessageId
-import com.dervlabs.chirp.domain.type.UserId
+import com.dervlabs.chirp.domain.types.ChatId
+import com.dervlabs.chirp.domain.types.ChatMessageId
+import com.dervlabs.chirp.domain.types.UserId
 import com.dervlabs.chirp.infra.database.entities.ChatMessageEntity
 import com.dervlabs.chirp.infra.database.mappers.toChatMessage
 import com.dervlabs.chirp.infra.database.repositories.ChatMessageRepository

@@ -3,7 +3,7 @@ package com.dervlabs.chirp.infra.messaging
 import com.dervlabs.chirp.domain.events.user.UserEvent
 import com.dervlabs.chirp.domain.models.ChatParticipant
 import com.dervlabs.chirp.infra.message_queue.MessageQueues
-import com.dervlabs.chirp.infra.service.ChatParticipantService
+import com.dervlabs.chirp.service.ChatParticipantService
 import org.springframework.amqp.rabbit.annotation.RabbitListener
 import org.springframework.stereotype.Component
 import org.springframework.transaction.annotation.Transactional

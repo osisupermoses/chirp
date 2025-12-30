@@ -1,4 +1,4 @@
-package com.dervlabs.chirp.domain.model
+package com.dervlabs.chirp.domain.models
 
 data class EmailVerificationToken(
     val id: Long,

@@ -1,6 +1,6 @@
 package com.dervlabs.chirp.api.dto
 
-import com.dervlabs.chirp.api.util.Password
+import com.dervlabs.chirp.api.utils.Password
 import jakarta.validation.constraints.NotBlank
 
 data class ChangePasswordRequest(

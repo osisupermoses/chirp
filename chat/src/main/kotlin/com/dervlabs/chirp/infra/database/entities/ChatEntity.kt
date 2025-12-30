@@ -1,6 +1,6 @@
 package com.dervlabs.chirp.infra.database.entities
 
-import com.dervlabs.chirp.domain.type.ChatId
+import com.dervlabs.chirp.domain.types.ChatId
 import jakarta.persistence.Entity
 import jakarta.persistence.FetchType
 import jakarta.persistence.GeneratedValue

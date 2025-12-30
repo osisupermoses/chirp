@@ -1,4 +1,4 @@
-package com.dervlabs.chirp.domain.exception
+package com.dervlabs.chirp.domain.exceptions
 
 class RateLimitException(
     val resetsInSeconds: Long

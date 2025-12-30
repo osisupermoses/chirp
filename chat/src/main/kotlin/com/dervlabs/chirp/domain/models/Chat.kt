@@ -1,6 +1,6 @@
 package com.dervlabs.chirp.domain.models
 
-import com.dervlabs.chirp.domain.type.ChatId
+import com.dervlabs.chirp.domain.types.ChatId
 import java.time.Instant
 
 data class Chat(

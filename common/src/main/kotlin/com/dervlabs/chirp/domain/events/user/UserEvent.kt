@@ -1,7 +1,7 @@
 package com.dervlabs.chirp.domain.events.user
 
 import com.dervlabs.chirp.domain.events.ChirpEvent
-import com.dervlabs.chirp.domain.type.UserId
+import com.dervlabs.chirp.domain.types.UserId
 import java.time.Instant
 import java.util.UUID
 

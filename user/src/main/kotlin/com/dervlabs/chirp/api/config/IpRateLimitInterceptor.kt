@@ -1,6 +1,6 @@
 package com.dervlabs.chirp.api.config
 
-import com.dervlabs.chirp.domain.exception.RateLimitException
+import com.dervlabs.chirp.domain.exceptions.RateLimitException
 import com.dervlabs.chirp.infra.rate_limiting.IpRateLimiter
 import com.dervlabs.chirp.infra.rate_limiting.IpResolver
 import jakarta.servlet.http.HttpServletRequest

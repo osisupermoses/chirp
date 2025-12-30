@@ -1,4 +1,4 @@
-package com.dervlabs.chirp.api.util
+package com.dervlabs.chirp.api.utils
 
 import jakarta.validation.Constraint
 import jakarta.validation.Payload

@@ -1,7 +1,7 @@
 package com.dervlabs.chirp.infra.database.repositories
 
-import com.dervlabs.chirp.domain.type.ChatId
-import com.dervlabs.chirp.domain.type.ChatMessageId
+import com.dervlabs.chirp.domain.types.ChatId
+import com.dervlabs.chirp.domain.types.ChatMessageId
 import com.dervlabs.chirp.infra.database.entities.ChatMessageEntity
 import org.springframework.data.domain.Pageable
 import org.springframework.data.domain.Slice

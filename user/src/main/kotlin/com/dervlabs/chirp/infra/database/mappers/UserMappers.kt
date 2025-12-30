@@ -1,6 +1,6 @@
 package com.dervlabs.chirp.infra.database.mappers
 
-import com.dervlabs.chirp.domain.model.User
+import com.dervlabs.chirp.domain.models.User
 import com.dervlabs.chirp.infra.database.entities.UserEntity
 
 fun UserEntity.toUser() = User(

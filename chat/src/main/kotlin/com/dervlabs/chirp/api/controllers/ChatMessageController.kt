@@ -1,8 +1,8 @@
 package com.dervlabs.chirp.api.controllers
 
-import com.dervlabs.chirp.api.util.requestUserId
-import com.dervlabs.chirp.domain.type.ChatMessageId
-import com.dervlabs.chirp.infra.service.ChatMessageService
+import com.dervlabs.chirp.api.utils.requestUserId
+import com.dervlabs.chirp.domain.types.ChatMessageId
+import com.dervlabs.chirp.service.ChatMessageService
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestMapping

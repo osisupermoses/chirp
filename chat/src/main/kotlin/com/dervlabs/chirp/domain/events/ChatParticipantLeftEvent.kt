@@ -1,7 +1,7 @@
 package com.dervlabs.chirp.domain.events
 
-import com.dervlabs.chirp.domain.type.ChatId
-import com.dervlabs.chirp.domain.type.UserId
+import com.dervlabs.chirp.domain.types.ChatId
+import com.dervlabs.chirp.domain.types.UserId
 
 data class ChatParticipantLeftEvent(
     val chatId: ChatId,

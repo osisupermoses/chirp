@@ -1,7 +1,7 @@
 package com.dervlabs.chirp.service
 
-import com.dervlabs.chirp.domain.exception.InvalidTokenException
-import com.dervlabs.chirp.domain.type.UserId
+import com.dervlabs.chirp.domain.exceptions.InvalidTokenException
+import com.dervlabs.chirp.domain.types.UserId
 import io.jsonwebtoken.Claims
 import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.security.Keys

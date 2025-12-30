@@ -11,7 +11,7 @@ import com.dervlabs.chirp.api.dto.ResetPasswordRequest
 import com.dervlabs.chirp.api.dto.UserDto
 import com.dervlabs.chirp.api.mappers.toAuthenticatedUserDto
 import com.dervlabs.chirp.api.mappers.toUserDto
-import com.dervlabs.chirp.api.util.requestUserId
+import com.dervlabs.chirp.api.utils.requestUserId
 import com.dervlabs.chirp.infra.rate_limiting.EmailRateLimiter
 import com.dervlabs.chirp.service.AuthService
 import com.dervlabs.chirp.service.EmailVerificationService

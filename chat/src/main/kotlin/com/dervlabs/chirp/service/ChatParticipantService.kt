@@ -1,7 +1,7 @@
-package com.dervlabs.chirp.infra.service
+package com.dervlabs.chirp.service
 
 import com.dervlabs.chirp.domain.models.ChatParticipant
-import com.dervlabs.chirp.domain.type.UserId
+import com.dervlabs.chirp.domain.types.UserId
 import com.dervlabs.chirp.infra.database.mappers.toChatParticipant
 import com.dervlabs.chirp.infra.database.mappers.toChatParticipantEntity
 import com.dervlabs.chirp.infra.database.repositories.ChatParticipantRepository

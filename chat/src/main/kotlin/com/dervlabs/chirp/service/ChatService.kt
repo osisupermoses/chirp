@@ -1,4 +1,4 @@
-package com.dervlabs.chirp.infra.service
+package com.dervlabs.chirp.service
 
 import com.dervlabs.chirp.api.dto.ChatMessageDto
 import com.dervlabs.chirp.api.mappers.toChatMessageDto
@@ -10,8 +10,8 @@ import com.dervlabs.chirp.domain.exceptions.ForbiddenException
 import com.dervlabs.chirp.domain.exceptions.InvalidChatSizeException
 import com.dervlabs.chirp.domain.models.Chat
 import com.dervlabs.chirp.domain.models.ChatMessage
-import com.dervlabs.chirp.domain.type.ChatId
-import com.dervlabs.chirp.domain.type.UserId
+import com.dervlabs.chirp.domain.types.ChatId
+import com.dervlabs.chirp.domain.types.UserId
 import com.dervlabs.chirp.infra.database.entities.ChatEntity
 import com.dervlabs.chirp.infra.database.mappers.toChat
 import com.dervlabs.chirp.infra.database.mappers.toChatMessage
@@ -25,7 +25,6 @@ import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import java.time.Instant
-import kotlin.collections.get
 
 const val CHAT_MESSAGES_CACHE_NAME = "chat_messages"
 

@@ -5,9 +5,9 @@ import com.dervlabs.chirp.api.dto.ChatDto
 import com.dervlabs.chirp.api.dto.ChatMessageDto
 import com.dervlabs.chirp.api.dto.CreateChatRequest
 import com.dervlabs.chirp.api.mappers.toChatDto
-import com.dervlabs.chirp.api.util.requestUserId
-import com.dervlabs.chirp.domain.type.ChatId
-import com.dervlabs.chirp.infra.service.ChatService
+import com.dervlabs.chirp.api.utils.requestUserId
+import com.dervlabs.chirp.domain.types.ChatId
+import com.dervlabs.chirp.service.ChatService
 import jakarta.validation.Valid
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.DeleteMapping

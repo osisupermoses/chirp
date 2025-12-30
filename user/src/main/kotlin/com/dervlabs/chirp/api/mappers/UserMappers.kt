@@ -2,8 +2,8 @@ package com.dervlabs.chirp.api.mappers
 
 import com.dervlabs.chirp.api.dto.AuthenticatedUserDto
 import com.dervlabs.chirp.api.dto.UserDto
-import com.dervlabs.chirp.domain.model.AuthenticatedUser
-import com.dervlabs.chirp.domain.model.User
+import com.dervlabs.chirp.domain.models.AuthenticatedUser
+import com.dervlabs.chirp.domain.models.User
 
 fun AuthenticatedUser.toAuthenticatedUserDto(): AuthenticatedUserDto {
     return AuthenticatedUserDto(

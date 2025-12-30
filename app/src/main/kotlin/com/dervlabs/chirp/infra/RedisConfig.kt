@@ -1,7 +1,7 @@
 package com.dervlabs.chirp.infra
 
 import com.dervlabs.chirp.domain.events.ChirpEvent
-import com.dervlabs.chirp.infra.service.CHAT_MESSAGES_CACHE_NAME
+import com.dervlabs.chirp.service.CHAT_MESSAGES_CACHE_NAME
 import org.springframework.cache.annotation.EnableCaching
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration

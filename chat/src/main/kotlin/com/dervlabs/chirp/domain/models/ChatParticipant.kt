@@ -1,6 +1,6 @@
 package com.dervlabs.chirp.domain.models
 
-import com.dervlabs.chirp.domain.type.UserId
+import com.dervlabs.chirp.domain.types.UserId
 
 data class ChatParticipant(
     val userId: UserId,

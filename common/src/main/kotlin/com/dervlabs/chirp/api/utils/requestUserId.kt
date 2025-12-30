@@ -1,7 +1,7 @@
-package com.dervlabs.chirp.api.util
+package com.dervlabs.chirp.api.utils
 
 import com.dervlabs.chirp.domain.exceptions.UnauthorizedException
-import com.dervlabs.chirp.domain.type.UserId
+import com.dervlabs.chirp.domain.types.UserId
 import org.springframework.security.core.context.SecurityContextHolder
 
 val requestUserId: UserId

@@ -2,8 +2,8 @@ package com.dervlabs.chirp.api.controllers
 
 import com.dervlabs.chirp.api.dto.ChatParticipantDto
 import com.dervlabs.chirp.api.mappers.toChatParticipantDto
-import com.dervlabs.chirp.api.util.requestUserId
-import com.dervlabs.chirp.infra.service.ChatParticipantService
+import com.dervlabs.chirp.api.utils.requestUserId
+import com.dervlabs.chirp.service.ChatParticipantService
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
