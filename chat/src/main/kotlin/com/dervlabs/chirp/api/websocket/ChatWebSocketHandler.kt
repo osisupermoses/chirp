@@ -7,11 +7,13 @@ import com.dervlabs.chirp.api.dto.ws.IncomingWeSocketMessageType
 import com.dervlabs.chirp.api.dto.ws.IncomingWebSocketMessage
 import com.dervlabs.chirp.api.dto.ws.OutgoingWebSocketMessage
 import com.dervlabs.chirp.api.dto.ws.OutgoingWebSocketMessageType
+import com.dervlabs.chirp.api.dto.ws.ProfilePictureUpdateDto
 import com.dervlabs.chirp.api.dto.ws.SendMessageDto
 import com.dervlabs.chirp.api.mappers.toChatMessageDto
 import com.dervlabs.chirp.domain.events.ChatParticipantJoinedEvent
 import com.dervlabs.chirp.domain.events.ChatParticipantLeftEvent
 import com.dervlabs.chirp.domain.events.MessageDeletedEvent
+import com.dervlabs.chirp.domain.events.ProfilePictureUpdatedEvent
 import com.dervlabs.chirp.domain.types.ChatId
 import com.dervlabs.chirp.domain.types.UserId
 import com.dervlabs.chirp.service.ChatMessageService
@@ -298,6 +300,47 @@ class ChatWebSocketHandler(
                 )
             )
         )
+    }
+
+    @TransactionalEventListener(phase = TransactionPhase.AFTER_COMMIT)
+    fun onProfilePictureUpdated(event: ProfilePictureUpdatedEvent) {
+        val userChats = connectionLock.read {
+            userChatIds[event.userId]?.toList() ?: emptyList()
+        }
+
+        val dto = ProfilePictureUpdateDto(
+            userId = event.userId,
+            newUrl = event.newUrl
+        )
+
+        val sessionIds = mutableSetOf<String>()
+        userChats.forEach { chatId ->
+            connectionLock.read {
+                chatToSessions[chatId]?.let { sessionId ->
+                    sessionIds.addAll(sessionId)
+                }
+            }
+        }
+
+        val webSocketMessage = OutgoingWebSocketMessage(
+            type = OutgoingWebSocketMessageType.PROFILE_PICTURE_UPDATED,
+            payload = objectMapper.writeValueAsString(dto)
+        )
+        val messageJson = objectMapper.writeValueAsString(webSocketMessage)
+
+        sessionIds.forEach { sessionId ->
+            val userSession = connectionLock.read {
+                sessions[sessionId]
+            } ?: return@forEach
+
+            try {
+                if (userSession.session.isOpen) {
+                    userSession.session.sendMessage(TextMessage(messageJson))
+                }
+            } catch (e: Exception) {
+                logger.error("Could not send profile picture update to session $sessionId", e)
+            }
+        }
     }
 
     private fun sendError(

@@ -5,6 +5,7 @@ import com.dervlabs.chirp.domain.exceptions.StorageException
 import com.dervlabs.chirp.domain.models.ProfilePictureUploadCredentials
 import com.dervlabs.chirp.domain.types.UserId
 import org.springframework.beans.factory.annotation.Value
+import org.springframework.http.MediaType
 import org.springframework.stereotype.Service
 import org.springframework.web.client.RestClient
 import java.time.Instant
@@ -12,7 +13,7 @@ import java.util.UUID
 
 @Service
 class SupabaseStorageService(
-    @param:Value($$"${supbase.url}") private val supabaseUrl: String,
+    @param:Value($$"${supabase.url}") private val supabaseUrl: String,
     private val supbaseRestClient: RestClient
 ) {
     companion object {
@@ -75,6 +76,7 @@ class SupabaseStorageService(
         val response = supbaseRestClient
             .post()
             .uri("/storage/v1/object/upload/sign/$path")
+            .header("Content-Type", MediaType.APPLICATION_JSON_VALUE)
             .body(json)
             .retrieve()
             .body(SignedUploadResponse::class.java)
