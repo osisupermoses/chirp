@@ -1,4 +1,4 @@
-package com.dervlabs.chirp.security
+package com.dervlabs.chirp.api.security
 
 import com.dervlabs.chirp.api.config.JwtAuthFilter
 import jakarta.servlet.DispatcherType

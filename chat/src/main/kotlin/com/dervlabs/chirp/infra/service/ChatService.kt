@@ -1,5 +1,9 @@
 package com.dervlabs.chirp.infra.service
 
+import com.dervlabs.chirp.api.dto.ChatMessageDto
+import com.dervlabs.chirp.api.mappers.toChatMessageDto
+import com.dervlabs.chirp.domain.events.ChatParticipantJoinedEvent
+import com.dervlabs.chirp.domain.events.ChatParticipantLeftEvent
 import com.dervlabs.chirp.domain.exceptions.ChatNotFoundException
 import com.dervlabs.chirp.domain.exceptions.ChatParticipantNotFound
 import com.dervlabs.chirp.domain.exceptions.ForbiddenException
@@ -14,16 +18,68 @@ import com.dervlabs.chirp.infra.database.mappers.toChatMessage
 import com.dervlabs.chirp.infra.database.repositories.ChatMessageRepository
 import com.dervlabs.chirp.infra.database.repositories.ChatParticipantRepository
 import com.dervlabs.chirp.infra.database.repositories.ChatRepository
+import org.springframework.cache.annotation.Cacheable
+import org.springframework.context.ApplicationEventPublisher
+import org.springframework.data.domain.PageRequest
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
+import java.time.Instant
+import kotlin.collections.get
+
+const val CHAT_MESSAGES_CACHE_NAME = "chat_messages"
 
 @Service
 class ChatService(
     private val chatRepository: ChatRepository,
     private val chatParticipantRepository: ChatParticipantRepository,
-    private val chatMessageRepository: ChatMessageRepository
+    private val chatMessageRepository: ChatMessageRepository,
+    private val applicationEventPublisher: ApplicationEventPublisher
 ) {
+
+
+    @Cacheable(
+        value = [CHAT_MESSAGES_CACHE_NAME],
+        key = "#chatId", // '#chatId' represents parameter passed to getChatMessages(..) function
+        condition = "#before == null && #pageSize <= 50", // only when this condition is true will redis responds with the cache messages else the call goes to our postgres db
+        sync = true // if two simultaneous requests come in at the same time, it'll wait for the first query to finish, then respond with cache gotten from the first call
+    )
+    fun getChatMessages(
+        chatId: ChatId,
+        before: Instant? = null,
+        pageSize: Int
+    ): List<ChatMessageDto> {
+        return chatMessageRepository
+            .findByChatIdBefore(
+                chatId = chatId,
+                before = before ?: Instant.now(),
+                pageable = PageRequest.of(0, pageSize)
+            )
+            .content
+            .asReversed()
+            .map { it.toChatMessage().toChatMessageDto() }
+    }
+
+    fun getChatById(
+        chatId: ChatId,
+        requestUserId: UserId,
+    ): Chat? {
+        return chatRepository
+            .findChatById(chatId, requestUserId)
+            ?.toChat(lastMessageForChat(chatId))
+    }
+
+    fun findChatsByUser(userId: UserId): List<Chat> {
+        val chatEntities = chatRepository.findAllByUserId(userId)
+        val chatIds = chatEntities.mapNotNull { it.id }
+        val latestMessages = chatMessageRepository
+            .findLatestMessagesByChatIds(chatIds.toSet())
+            .associateBy { it.chatId }
+
+        return chatEntities
+            .map { it.toChat(lastMessage = latestMessages[it.id]?.toChatMessage()) }
+            .sortedByDescending { it.lastActivityAt }
+    }
 
     @Transactional
     fun createChat(
@@ -78,6 +134,13 @@ class ChatService(
             }
         ).toChat(lastMessage)
 
+        applicationEventPublisher.publishEvent(
+            ChatParticipantJoinedEvent(
+                chatId = chatId,
+                userIds = userIds
+            )
+        )
+
         return updatedChat
     }
 
@@ -101,6 +164,13 @@ class ChatService(
             chat.apply {
                 participants = chat.participants - participant
             }
+        )
+
+        applicationEventPublisher.publishEvent(
+            ChatParticipantLeftEvent(
+                chatId = chatId,
+                userId = userId
+            )
         )
     }
 

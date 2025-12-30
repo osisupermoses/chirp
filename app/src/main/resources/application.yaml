@@ -11,11 +11,10 @@ spring:
       timeout: 2000ms
 
   datasource:
-    url: jdbc:postgresql://aws-1-eu-west-1.pooler.supabase.com:5432/postgres
-    username: postgres.sijmyvkwilhvrwgnhzpa
+    url: jdbc:postgresql://db.sijmyvkwilhvrwgnhzpa.supabase.co:5432/postgres?sslmode=require
+    username: postgres
     password: ${POSTGRES_PASSWORD}
     driver-class-name: org.postgresql.Driver
-
     hikari:
       maximum-pool-size: 10
       minimum-idle: 5
