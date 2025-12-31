@@ -91,3 +91,7 @@ nginx:
 supabase:
   url: "https://sijmyvkwilhvrwgnhzpa.supabase.co"
   service-key: ${SUPABASE_SERVICE_KEY}
+
+
+firebase:
+  credentials-path: "classpath:firebase-credentials/chirp-firebase-adminsdk.json"
