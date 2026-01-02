@@ -1,27 +1,20 @@
 plugins {
-    alias(libs.plugins.kotlin.jvm)
-    alias(libs.plugins.kotlin.spring)
-    alias(libs.plugins.spring.boot)
-    alias(libs.plugins.spring.dependency.management)
+    id("java-library")
+    id("chirp.spring-boot-service")
     alias(libs.plugins.kotlin.jpa)
 }
 
-group = "com.dervlabs"
-version = "unspecified"
-
-repositories {
-    mavenCentral()
-    maven { url = uri("https://repo.spring.io/snapshot") }
-}
-
 dependencies {
+    implementation(projects.common)
+
+    implementation(libs.firebase.admin.sdk)
+    implementation(libs.spring.boot.starter.mail)
+    implementation(libs.spring.boot.starter.amqp)
+    implementation(libs.spring.boot.starter.thymeleaf)
+    implementation(libs.spring.boot.starter.validation)
+
+    implementation(libs.spring.boot.starter.data.jpa)
+    runtimeOnly(libs.postgresql)
+
     testImplementation(kotlin("test"))
-}
-
-kotlin {
-    jvmToolchain(21)
-}
-
-tasks.test {
-    useJUnitPlatform()
 }

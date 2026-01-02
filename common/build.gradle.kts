@@ -1,27 +1,18 @@
 plugins {
-    alias(libs.plugins.kotlin.jvm)
-    alias(libs.plugins.kotlin.spring)
-    alias(libs.plugins.spring.boot)
-    alias(libs.plugins.spring.dependency.management)
-    alias(libs.plugins.kotlin.jpa)
-}
-
-group = "com.dervlabs"
-version = "unspecified"
-
-repositories {
-    mavenCentral()
-    maven { url = uri("https://repo.spring.io/snapshot") }
+    id("java-library")
+    id("chirp.kotlin-common")
 }
 
 dependencies {
+    api(libs.kotlin.reflect)
+    api(libs.jackson.module.kotlin)
+
+    implementation(libs.jwt.api)
+    runtimeOnly(libs.jwt.impl)
+    runtimeOnly(libs.jwt.jackson)
+
+    implementation(libs.spring.boot.starter.security)
+    implementation(libs.spring.boot.starter.amqp)
+
     testImplementation(kotlin("test"))
-}
-
-kotlin {
-    jvmToolchain(21)
-}
-
-tasks.test {
-    useJUnitPlatform()
 }

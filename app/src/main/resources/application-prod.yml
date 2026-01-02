@@ -1,0 +1,23 @@
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: validate
+  # You should use production credentials here (this is a test one)!
+  mail:
+    host: smtp.mailgun.org
+    username: postmaster@sandboxc4406bef56e14681a8a8b6335f56341d.mailgun.org
+
+jwt:
+  expiration-minutes: 15
+
+nginx:
+  require-proxy: true
+
+chirp:
+  email:
+    url: "https://chirp.dervlabs.io"
+  rate-limit:
+    ip:
+      apply-limit: true
+  web-socket:
+    allowed-origin: "https://chirp.dervlabs.io"
