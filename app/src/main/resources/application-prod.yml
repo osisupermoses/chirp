@@ -15,9 +15,9 @@ nginx:
 
 chirp:
   email:
-    url: "https://chirp.dervlabs.com"
+    url: "https://chirp.dervlabs.io"
   rate-limit:
     ip:
       apply-limit: true
   web-socket:
-    allowed-origin: "https://chirp.dervlabs.com"
+    allowed-origin: "https://chirp.dervlabs.io"

@@ -75,7 +75,7 @@ jwt:
 
 chirp:
   email:
-    from: mail@dervlabs.com
+    from: mail@dervlabs.io
     verification:
       expiry-hours: 24
     reset-password:

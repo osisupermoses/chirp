@@ -144,9 +144,9 @@ class FirebasePushNotificationService(
                 "temporary failures: ${temporaryFailures.size}, permanent failures: ${permanentFailures.size}")
 
         return PushNotificationSendResult(
-            succeeded = succeeded,
-            temporaryFailures = temporaryFailures,
-            permanentFailures = permanentFailures
+            succeeded = succeeded.toList(),
+            temporaryFailures = temporaryFailures.toList(),
+            permanentFailures = permanentFailures.toList()
         )
     }
 }

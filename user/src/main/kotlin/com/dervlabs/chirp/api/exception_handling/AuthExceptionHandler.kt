@@ -9,8 +9,6 @@ import com.dervlabs.chirp.domain.exceptions.UnauthorizedException
 import com.dervlabs.chirp.domain.exceptions.UserAlreadyExistsException
 import com.dervlabs.chirp.domain.exceptions.UserNotFoundException
 import org.springframework.http.HttpStatus
-import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.MethodArgumentNotValidException
 import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.ResponseStatus
 import org.springframework.web.bind.annotation.RestControllerAdvice
@@ -89,21 +87,4 @@ class AuthExceptionHandler {
         "code" to "RATE_LIMIT_EXCEEDED",
         "message" to e.message
     )
-
-    @ExceptionHandler(MethodArgumentNotValidException::class)
-    fun onValidationException(
-        e: MethodArgumentNotValidException
-    ): ResponseEntity<Map<String, Any>> {
-        val errors = e.bindingResult.fieldErrors.map {
-            it.defaultMessage ?: "Invalid value"
-        }
-        return ResponseEntity
-            .status(HttpStatus.BAD_REQUEST)
-            .body(
-                mapOf(
-                    "code" to "VALIDATION_ERROR",
-                    "errors" to errors
-                )
-            )
-    }
 }
